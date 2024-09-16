@@ -1,5 +1,5 @@
 
-import { fetchDataFromTMDB } from "../utile/fetchDataFromTMDB";
+import { fetchDataFromTMDB } from "../util/fetchDataFromTMDB";
 
 
     export const fetchGenres = async () => {
