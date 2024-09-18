@@ -1,4 +1,4 @@
-import { fetchDataFromTMDB } from '../utile/fetchDataFromTMDB';
+import { fetchDataFromTMDB } from '../util/fetchDataFromTMDB';
 
 // Helper function to format category for the API
 const formatCategoryForAPI = (category) => {
