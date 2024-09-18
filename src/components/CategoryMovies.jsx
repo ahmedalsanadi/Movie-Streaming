@@ -25,7 +25,7 @@ const CategoryMovies = ({ movies, categoryId }) => {
         <div className="col-span-12 lg:col-span-9">
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {movies?.length > 0 ? (
-              movies.map((movie) => <MovieCard key={movie.id} movie={movie} />)
+              movies.map((movie) => <CardFrontSide key={movie.id} movie={movie} />)
             ) : (
               <p className="col-span-full text-center text-gray-500">
                 No movies found
@@ -41,7 +41,7 @@ const CategoryMovies = ({ movies, categoryId }) => {
 export default CategoryMovies;
 
 // Component to render a movie card with front and back views
-const MovieCard = ({ movie }) => {
+const CardFrontSide = ({ movie }) => {
   return (
     <div className="relative w-full max-w-xs h-[350px] mx-auto perspective">
       {/* Front side of the card */}
@@ -64,14 +64,14 @@ const MovieCard = ({ movie }) => {
 
       {/* Back side of the card */}
       <div className="card-back absolute w-full h-full bg-gradient-to-br from-[#022c43] to-[#0a3548] text-white flex items-center justify-center rounded-lg transform rotate-y-180 transition-transform duration-500 shadow-xl">
-        <MovieDetails movie={movie} />
+        <CardBackSide movie={movie} />
       </div>
     </div>
   );
 };
 
 // Component to display movie details on the back side of the card
-const MovieDetails = ({ movie }) => {
+const CardBackSide = ({ movie }) => {
   return (
     <div className="p-6 text-left">
       {/* Movie Details Title */}
