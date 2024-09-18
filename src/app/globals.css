@@ -71,3 +71,28 @@ body {
   vertical-align: top;
   margin-left: 2px;
 }
+
+.perspective {
+  perspective: 1000px;
+}
+
+.card-front,
+.card-back {
+  backface-visibility: hidden;
+}
+
+.card-front {
+  transform: rotateY(0deg);
+}
+
+.card-back {
+  transform: rotateY(-180deg);
+}
+
+.perspective:hover .card-front {
+  transform: rotateY(180deg);
+}
+
+.perspective:hover .card-back {
+  transform: rotateY(0deg);
+}
