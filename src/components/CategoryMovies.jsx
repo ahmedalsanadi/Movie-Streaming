@@ -1,5 +1,4 @@
 import React from "react";
-import Image from "next/image";
 import CardFrontSide from "./CardFrontSide";
 
 const imgBaseUrl = "https://image.tmdb.org/t/p/w500";
@@ -25,7 +24,7 @@ const CategoryMovies = ({ movies, categoryId }) => {
         <div className="col-span-12 lg:col-span-9">
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {movies?.length > 0 ? (
-              movies.map((movie) => <CardFrontSide key={movie.id} data={movie} imgBaseUrl={imgBaseUrl} />)
+              movies.map((movie) => <CardFrontSide key={movie.id} data={movie} imgBaseUrl={imgBaseUrl} link={`/movie/${movie.id}`} />)
             ) : (
               <p className="col-span-full text-center text-gray-500">
                 No movies found
@@ -39,4 +38,3 @@ const CategoryMovies = ({ movies, categoryId }) => {
 };
 
 export default CategoryMovies;
-
