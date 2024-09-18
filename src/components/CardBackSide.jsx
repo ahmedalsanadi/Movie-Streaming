@@ -1,4 +1,4 @@
-
+import StarRating from "./StarRating";
 const CardBackSide = ({ data }) => {
   return (
     <div className="p-6 text-left">
@@ -17,7 +17,7 @@ const CardBackSide = ({ data }) => {
       {/* Rating Section */}
       <div className="mb-4">
         <p className="font-semibold text-yellow-300">Rating:</p>
-        {/* <StarRating rating={data.vote_average} /> */}
+        <StarRating rating={data.vote_average} />
       </div>
     </div>
   );
