@@ -1,29 +1,29 @@
-import { useState, useEffect } from "react";
-import Link from 'next/link';
+import { useState, useEffect } from "react"
+import Link from "next/link"
 
-const LinkDropdown = ({ label, dropdownItems }) => {
-  const [showDropdown, setShowDropdown] = useState(false);
-  const [expanded, setExpanded] = useState(false);
-  let dropdownTimeout;
+const LinkDropdown = ({ label, dropdownItems, href, dropdownItemshref }) => {
+  const [showDropdown, setShowDropdown] = useState(false)
+  const [expanded, setExpanded] = useState(false)
+  let dropdownTimeout
 
   // Function to show dropdown with delay on hover leave
   const handleMouseEnter = () => {
-    if (dropdownTimeout) clearTimeout(dropdownTimeout);
-    setShowDropdown(true);
-  };
+    if (dropdownTimeout) clearTimeout(dropdownTimeout)
+    setShowDropdown(true)
+  }
 
   // Function to hide dropdown with a delay
   const handleMouseLeave = () => {
-    dropdownTimeout = setTimeout(() => setShowDropdown(false), 200);
-  };
+    dropdownTimeout = setTimeout(() => setShowDropdown(false), 200)
+  }
 
   // Cleanup the timeout
   useEffect(() => {
-    return () => clearTimeout(dropdownTimeout);
-  }, []);
+    return () => clearTimeout(dropdownTimeout)
+  }, [])
 
   // Show only the first 6 items by default
-  const displayedItems = expanded ? dropdownItems : dropdownItems.slice(0, 6);
+  const displayedItems = expanded ? dropdownItems : dropdownItems.slice(0, 6)
 
   return (
     <div
@@ -31,7 +31,10 @@ const LinkDropdown = ({ label, dropdownItems }) => {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <a href="#" className="hover:text-[#01b4e4] flex items-center  text-lg font-semibold">
+      <a
+        href="#"
+        className="hover:text-[#01b4e4] flex items-center  text-lg font-semibold"
+      >
         {label}
         <span
           className={`ml-2 transform transition-transform duration-500 ${
@@ -58,20 +61,30 @@ const LinkDropdown = ({ label, dropdownItems }) => {
         <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-64 max-h-60 overflow-hidden z-10">
           {/* Arrow */}
           <div className="relative">
-          <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 border-b-8 border-transparent border-b-gray-700 dark:border-b-white"></div>
+            <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 border-b-8 border-transparent border-b-gray-700 dark:border-b-white"></div>
           </div>
 
           {/* Dropdown Content */}
           <div className="bg-gray-800 dark:bg-white dark:text-black text-gray-200 rounded-md shadow-lg p-4 overflow-y-auto max-h-60 transition-colors duration-500">
-          <ul className="grid grid-cols-2 gap-2">
+            <ul className="grid grid-cols-2 gap-2">
               {displayedItems?.map((item, idx) => (
                 <li
                   key={idx}
                   className="px-2 py-1 hover:text-[#01b4e4] cursor-pointer transition-colors duration-300"
                 >
-                  <Link href={`/movie/${item.toLowerCase().replace(/ /g, '-')}`}>
-                    {item}
-                  </Link>
+                  {href === "tv" ? (
+                    <Link
+                      href={`/${href}/${item.toLowerCase().replace(/ /g, "_")}`}
+                    >
+                      {item}
+                    </Link>
+                  ) : (
+                    <Link
+                      href={`/${href}/${item.toLowerCase().replace(/ /g, "-")}`}
+                    >
+                      {item}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>
@@ -89,7 +102,7 @@ const LinkDropdown = ({ label, dropdownItems }) => {
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default LinkDropdown;
+export default LinkDropdown
