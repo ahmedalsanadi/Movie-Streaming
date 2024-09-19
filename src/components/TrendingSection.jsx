@@ -5,6 +5,7 @@ import { useTrendingMovies } from "../hooks/useTrendingMovies"
 import ToggleSwitch from "./ToggleSwitch"
 import MediaCard from "./MediaCard" // Import the MediaCard component
 import HorizontalSlider from "./HorizontalSlider" // Import the reusable HorizontalSlider component
+import MediaCardPlaceholder from "./MediaCardPlaceholder"
 
 export default function TrendingSection() {
   const [trendingType, setTrendingType] = useState("day")
@@ -91,7 +92,7 @@ export default function TrendingSection() {
 
         {/* Loading State */}
         {loading ? (
-          <p>Loading...</p>
+         <MediaCardPlaceholder />
         ) : (
           <HorizontalSlider>
             <Slider {...settings}>
