@@ -1,17 +1,28 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from "react"
 
 export const useDarkMode = () => {
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(false)
 
   useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
+    // Check if we're in a browser environment
+    if (typeof window !== "undefined") {
+      const prefersDarkScheme = window.matchMedia(
+        "(prefers-color-scheme: dark)",
+      ).matches
+
+      const savedMode = localStorage.getItem("darkMode")
+      setDarkMode(savedMode ? savedMode === "true" : prefersDarkScheme)
     }
-  }, [darkMode]);
+  }, [])
 
-  const toggleDarkMode = () => setDarkMode(!darkMode);
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem("darkMode", darkMode)
+      document.documentElement.classList.toggle("dark", darkMode)
+    }
+  }, [darkMode])
 
-  return { darkMode, toggleDarkMode };
-};
+  const toggleDarkMode = () => setDarkMode((prev) => !prev)
+
+  return { darkMode, toggleDarkMode }
+}
