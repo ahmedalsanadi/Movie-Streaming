@@ -9,6 +9,7 @@ import ProfileDropdown from "../components/ProfileDropdown"
 import Image from "next/image"
 import logo from "../images/logo.svg"
 import { fetchGenres } from "../services/fetchGenres"
+import Link from "next/link"
 
 // Centralized navLinks data
 const NAV_LINKS_TEMPLATE = [
@@ -62,12 +63,18 @@ const Navbar = () => {
           </div>
 
           {/* Logo */}
-          <div className="cursor-pointer flex items-center space-x-2">
-            <span className="text-2xl font-bold text-[#5fcde4] lg:hidden">
-              TMDB
-            </span>
-            <Image className="w-36 h-5 hidden lg:block" src={logo} alt="Logo" />
-          </div>
+          <Link href="/">
+            <div className="cursor-pointer flex items-center space-x-2">
+              <span className="text-2xl font-bold text-[#5fcde4] lg:hidden">
+                TMDB
+              </span>
+              <Image
+                className="w-36 h-5 hidden lg:block"
+                src={logo}
+                alt="Logo"
+              />
+            </div>
+          </Link>
 
           {/* Links with dropdowns */}
           <div className="hidden md:flex space-x-4 text-sm font-medium">
