@@ -27,9 +27,14 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white dark:bg-[#032541] text-[#032541] dark:text-white`}
       >
-        <Navbar />
-        {children}
-        <Footer />
+   <main className="my-4">
+     <Navbar />
+     <div >
+      {children}
+     </div>
+      
+       <Footer />
+   </main>
       </body>
     </html>
   )
