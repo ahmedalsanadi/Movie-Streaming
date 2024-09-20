@@ -1,4 +1,4 @@
-import React from "react"
+import React from "react";
 
 const ToggleSwitch = ({ options, selectedOption, onChange }) => {
   return (
@@ -19,7 +19,7 @@ const ToggleSwitch = ({ options, selectedOption, onChange }) => {
         ))}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ToggleSwitch
+export default ToggleSwitch;

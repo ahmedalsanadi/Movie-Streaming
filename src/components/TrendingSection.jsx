@@ -37,13 +37,14 @@ export default function TrendingSection() {
     arrows: false,
     infinite: true,
     speed: 800,
-    slidesToShow: 6, // Show 6 slides on larger screens
-    slidesToScroll: 5,
+    slidesToShow: 7, // Show 6 slides on larger screens
+    slidesToScroll: 10,
     autoplay: true,
     autoplaySpeed: 4000,
     cssEase: "ease-in-out",
     pauseOnHover: false,
     pauseOnFocus: false,
+    
     responsive: [
       {
         breakpoint: 1025, // Screen width less than 1024px
@@ -70,17 +71,10 @@ export default function TrendingSection() {
   }
 
   return (
-    <div className="container mx-auto font-custom px-4 ">
-      <div
-        className="trending-section "
-        style={
-          {
-            /*boxShadow:'inset -38px 0px 20px -15px rgba(255, 255, 254, 0.62)' */
-          }
-        }
-      >
-        <div className="toggle-switch flex items-center gap-4 mb-6 ">
-          <h2 className="text-2xl font-bold pl-4">Trending</h2>
+    <div className='container mx-auto font-custom px-4 '>
+    <div className="trending-section">
+      <div className="toggle-switch flex items-center gap-4 mb-6">
+        <h2 className="text-2xl font-bold pl-4">Trending</h2>
 
           {/* Toggle Switch */}
           <ToggleSwitch
@@ -92,13 +86,14 @@ export default function TrendingSection() {
 
         {/* Loading State */}
         {loading ? (
-              <HorizontalSlider>
-                <MediaCardPlaceholder />
-              </HorizontalSlider>
-     
+        <HorizontalSlider>
+          {[...Array(7)].map((_, index) => (
+            <MediaCardPlaceholder key={index} />
+          ))}
+        </HorizontalSlider>
         ) : (
           <HorizontalSlider>
-            <Slider {...settings}>
+     <Slider {...settings}>
               {movies.map((movie) => (
                 <MediaCard
                   key={movie.id}
