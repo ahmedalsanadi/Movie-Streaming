@@ -86,7 +86,7 @@ export default function TrendingSection() {
 
         {/* Loading State */}
         {loading ? (
-          <HorizontalSlider>
+        <HorizontalSlider>
           {[...Array(7)].map((_, index) => (
             <MediaCardPlaceholder key={index} />
           ))}
