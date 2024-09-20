@@ -3,6 +3,7 @@ import Welcome from "@/components/Welcome"
 import Image from "next/image"
 import HeroSection from "@/components/HeroSection"
 import WhatsPopularSection from "@/components/WhatsPopularSection"
+import FreeToWatchSection from "@/components/FreeToWatchSection"
 
 export default function Home() {
   return (
@@ -10,6 +11,7 @@ export default function Home() {
       <HeroSection />
       <TrendingSection />
       <WhatsPopularSection />
+      <FreeToWatchSection />
     </div>
   )
 }
