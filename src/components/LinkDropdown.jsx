@@ -72,19 +72,11 @@ const LinkDropdown = ({ label, dropdownItems, href, dropdownItemshref }) => {
                   key={idx}
                   className="px-2 py-1 hover:text-[#01b4e4] cursor-pointer transition-colors duration-300"
                 >
-                  {href === "tv" ? (
-                    <Link
-                      href={`/${href}/${item.toLowerCase().replace(/ /g, "_")}`}
-                    >
-                      {item}
-                    </Link>
-                  ) : (
-                    <Link
-                      href={`/${href}/${item.toLowerCase().replace(/ /g, "-")}`}
-                    >
-                      {item}
-                    </Link>
-                  )}
+                  <Link
+                    href={`/${href}/${item.toLowerCase().replace(/ /g, "-")}`}
+                  >
+                    {item}
+                  </Link>
                 </li>
               ))}
             </ul>
