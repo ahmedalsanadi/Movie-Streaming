@@ -3,10 +3,10 @@ import footerImg from "./../images/footer.svg"
 const Footer = () => {
   return (
     <footer className="bg-[#032541] py-16 text-white dark:bg-[#02345c]">
-      <div className="container mx-auto flex justify-between px-56">
+      <div className="container mx-auto flex flex-col justify-between items-center gap-4 md:flex-row md:items-start">
         <nav className="flex flex-col gap-10">
-          <div className="flex justify-end">
-            <Image src={footerImg} alt="footer logo" className="w-40 " />
+          <div className="flex md:justify-end">
+            <Image src={footerImg} alt="footer logo" className="w-40" />
           </div>
           <div>
             <button className=" bg-white px-5 py-4 rounded-lg font-bold text-[#01b4e4]">
