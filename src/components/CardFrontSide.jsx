@@ -23,7 +23,7 @@ const CardFrontSide = ({ data, imgBaseUrl, link }) => {
             <div className="w-full h-full bg-gray-100"></div>
           )}
           <div className="absolute bottom-0 w-full bg-black bg-opacity-80 text-white text-center p-2 text-lg font-semibold font-custom">
-            {data.name}
+          {data.title || data.name}
           </div>
         </div>
         {/* Back side of the card */}
