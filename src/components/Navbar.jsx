@@ -88,12 +88,12 @@ const Navbar = () => {
               />
             ))}
             {/* Actors*/}
-            <a
-              href="#"
+            <Link
+              href="/actors"
               className="hover:text-[#01b4e4] flex items-center  text-lg font-semibold "
             >
               Actors
-            </a>
+            </Link>
           </div>
         </div>
 
