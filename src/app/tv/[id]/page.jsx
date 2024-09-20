@@ -28,3 +28,5 @@ const TvPage = async ({ params }) => {
     </div>
   )
 }
+
+export default TvPage;
