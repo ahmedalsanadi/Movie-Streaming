@@ -92,7 +92,10 @@ export default function TrendingSection() {
 
         {/* Loading State */}
         {loading ? (
-         <MediaCardPlaceholder />
+              <HorizontalSlider>
+                <MediaCardPlaceholder />
+              </HorizontalSlider>
+     
         ) : (
           <HorizontalSlider>
             <Slider {...settings}>
