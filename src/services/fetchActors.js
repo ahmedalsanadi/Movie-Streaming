@@ -1,7 +1,7 @@
 // services/fetchActors.js
 import { fetchDataFromTMDB } from "./../util/fetchDataFromTMDB"
 
-export const fetchPopularActors = async () => {
-  const data = await fetchDataFromTMDB("/person/popular")
-  return data.results // Adjust this according to the structure of your API response
+export const fetchPopularActors = async (page = 1) => {
+  const data = await fetchDataFromTMDB(`/person/popular?page=${page}`)
+  return data // Returns the full response including pagination info
 }
