@@ -1,6 +1,7 @@
  import CategoryPage from "@/components/CategoryPage";
 import { formatCategoryForAPI } from "@/services/formatCategoryForAPI";
 import { fetchDataFromTMDB } from "@/util/fetchDataFromTMDB"
+import SingleTvShow from '@/components/SingleTvShow';
 
 
 const TvPage = async ({ params }) => {
@@ -20,8 +21,8 @@ const TvPage = async ({ params }) => {
        <CategoryPage pageTitle="tv" shows={data.results} categoryId={id} />
        
       ) : data ? (
-        // <SingleMovie movie={data} />
-        <h1> single page : {data.results}</h1>
+        <SingleTvShow tvShow={data} />
+       
       ) : (
         <div>No Tv found</div>
       )}
