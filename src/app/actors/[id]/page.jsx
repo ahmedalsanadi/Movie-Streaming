@@ -9,6 +9,7 @@ const ActorPage = ({ params }) => {
   const { id } = params // Get actor ID from the dynamic route
   const [actor, setActor] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [showFullBiography, setShowFullBiography] = useState(false) // State to control the biography display
 
   useEffect(() => {
     const getActorDetails = async () => {
@@ -38,6 +39,13 @@ const ActorPage = ({ params }) => {
     return <div>Actor not found</div>
   }
 
+  // Determine whether to show full biography or just a part of it
+  const biography = actor.biography || "Biography not available."
+  const isBiographyLong = biography.length > 500
+  const displayedBiography = showFullBiography
+    ? biography
+    : biography.slice(0, 500)
+
   return (
     <div className="container mx-auto p-6 flex flex-col md:flex-row gap-8">
       {/* Actor Image */}
@@ -59,8 +67,17 @@ const ActorPage = ({ params }) => {
         <div className="mb-6">
           <h2 className="text-2xl font-semibold mb-2">Biography</h2>
           <p className="text-lg">
-            {actor.biography || "Biography not available."}
+            {displayedBiography}
+            {isBiographyLong && !showFullBiography && "…"}
           </p>
+          {isBiographyLong && (
+            <button
+              onClick={() => setShowFullBiography(!showFullBiography)}
+              className="mt-4 px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition duration-300 ease-in-out"
+            >
+              {showFullBiography ? "Show Less" : "Show More"}
+            </button>
+          )}
         </div>
 
         {/* Known For */}
