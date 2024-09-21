@@ -68,9 +68,9 @@ const HeroSection = () => {
      
       {/* Curved overlay */}
       <div 
-        className="absolute -bottom-0 -mt-2  h-16 md:h-16 lg:h-[70px] left-0 right-0 bg-white dark:bg-[#032541]"
+        className="absolute -bottom-0 -mt-2  h-16 md:h-16 lg:h-[70px] left-0 right-0    bg-gray-200      dark:bg-gray-900"
         style={{
-        
+   
           borderTopLeftRadius: '50% 100%',
           borderTopRightRadius: '50% 100%',
           transform: 'translateY(1px)',
