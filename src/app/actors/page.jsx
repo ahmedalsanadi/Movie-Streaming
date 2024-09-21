@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react"
 import Image from "next/image"
 import { fetchPopularActors } from "../../services/fetchActors"
+import LoadingSpinner from "./../../components/LoadingSpinner"
 
 // Define the URLs for default images
 import defaultMaleImage from "./../../images/default-male.jpg"
@@ -79,12 +80,16 @@ const PopularActors = () => {
   }
 
   if (loading) {
-    return <div>Loading...</div>
+    return (
+      <div>
+        <LoadingSpinner />
+      </div>
+    )
   }
 
   return (
     <div className="container mx-auto py-8">
-      <h1 className="text-3xl font-bold mb-6">Popular Actors</h1>
+      <h1 className="text-6xl font-bold mb-6 text-center">Popular Actors</h1>
 
       {/* Actor Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -96,7 +101,9 @@ const PopularActors = () => {
                 gender={actor.gender}
                 name={actor.name}
               />
-              <h2 className="mt-2 text-xl font-semibold">{actor.name}</h2>
+              <h2 className="mt-2 text-xl font-semibold text-center">
+                {actor.name}
+              </h2>
             </div>
           </Link>
         ))}
