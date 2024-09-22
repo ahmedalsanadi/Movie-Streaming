@@ -64,7 +64,7 @@ const WhatsPopularSection = () => {
       <div className="whats-popular-section">
         {/* Heading and Toggle Switch */}
         <div className="toggle-switch flex items-center gap-4 mb-6">
-          <h2 className="text-2xl font-bold pl-4">What's Popular</h2>
+          <h2 className="text-2xl font-bold pl-4">What is Popular</h2>
           <ToggleSwitch
             options={categories}
             selectedOption={selectedCategory}
