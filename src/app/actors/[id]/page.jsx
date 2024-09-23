@@ -1,22 +1,24 @@
 "use client"
+import { FaInstagram, FaTwitter, FaFacebook } from "react-icons/fa" // Import social media icons
 import { useEffect, useState } from "react"
 import { fetchDataFromTMDB } from "../../../util/fetchDataFromTMDB"
 import Image from "next/image"
-import Link from "next/link" // Import Link from Next.js
+import Link from "next/link"
 import LoadingSpinner from "@/components/LoadingSpinner"
 
 const ActorPage = ({ params }) => {
-  const { id } = params // Get actor ID from the dynamic route
+  const { id } = params
   const [actor, setActor] = useState(null)
   const [loading, setLoading] = useState(true)
-  const [showFullBiography, setShowFullBiography] = useState(false) // State to control the biography display
+  const [showFullBiography, setShowFullBiography] = useState(false)
 
   useEffect(() => {
     const getActorDetails = async () => {
       try {
         const data = await fetchDataFromTMDB(
-          `/person/${id}?append_to_response=movie_credits`,
+          `/person/${id}?append_to_response=movie_credits,external_ids`,
         )
+        console.log("Actor External IDs:", data.external_ids) // Logging external_ids for debugging
         setActor(data)
         setLoading(false)
       } catch (error) {
@@ -39,7 +41,6 @@ const ActorPage = ({ params }) => {
     return <div>Actor not found</div>
   }
 
-  // Determine whether to show full biography or just a part of it
   const biography = actor.biography || "Biography not available."
   const isBiographyLong = biography.length > 500
   const displayedBiography = showFullBiography
@@ -80,6 +81,72 @@ const ActorPage = ({ params }) => {
           )}
         </div>
 
+        {/* Personal Info */}
+        <div className="mb-6">
+          <h2 className="text-2xl font-semibold mb-2">Personal Info</h2>
+          <p>
+            <strong>Birthday:</strong> {actor.birthday}
+          </p>
+          <p>
+            <strong>Gender:</strong> {actor.gender === 1 ? "Female" : "Male"}
+          </p>
+          <p>
+            <strong>Known Credits:</strong> {actor.movie_credits.cast.length}
+          </p>
+        </div>
+
+        {/* Social Media Links */}
+        {actor.external_ids && (
+          <div className="mb-6">
+            <h2 className="text-2xl font-semibold mb-4">
+              Follow on Social Media
+            </h2>
+            <div className="flex items-center gap-4">
+              {actor.external_ids.instagram_id ? (
+                <a
+                  href={`https://instagram.com/${actor.external_ids.instagram_id}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold rounded-full shadow-md hover:shadow-lg transition-transform transform hover:scale-105"
+                >
+                  <FaInstagram size={20} />
+                  Instagram
+                </a>
+              ) : (
+                <p className="text-gray-500">Instagram link not available</p>
+              )}
+
+              {actor.external_ids.twitter_id ? (
+                <a
+                  href={`https://twitter.com/${actor.external_ids.twitter_id}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white font-semibold rounded-full shadow-md hover:shadow-lg transition-transform transform hover:scale-105"
+                >
+                  <FaTwitter size={20} />
+                  Twitter
+                </a>
+              ) : (
+                <p className="text-gray-500">Twitter link not available</p>
+              )}
+
+              {actor.external_ids.facebook_id ? (
+                <a
+                  href={`https://facebook.com/${actor.external_ids.facebook_id}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-4 py-2 bg-blue-700 text-white font-semibold rounded-full shadow-md hover:shadow-lg transition-transform transform hover:scale-105"
+                >
+                  <FaFacebook size={20} />
+                  Facebook
+                </a>
+              ) : (
+                <p className="text-gray-500">Facebook link not available</p>
+              )}
+            </div>
+          </div>
+        )}
+
         {/* Known For */}
         <div>
           <h2 className="text-2xl font-semibold mb-4">Known For</h2>
@@ -95,7 +162,7 @@ const ActorPage = ({ params }) => {
                     className="rounded-lg shadow-md"
                   />
                   <p className="text-center mt-2 text-sm font-medium">
-                    {movie.title}
+                    {movie.title} ({new Date(movie.release_date).getFullYear()})
                   </p>
                 </Link>
               </div>
