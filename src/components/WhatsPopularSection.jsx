@@ -63,7 +63,7 @@ const WhatsPopularSection = () => {
     <div className="container mx-auto font-custom px-4">
       <div className="whats-popular-section">
         {/* Heading and Toggle Switch */}
-        <div className="toggle-switch flex items-center gap-4 mb-6">
+        <div className="toggle-switch flex items-center gap-4 mb-2">
           <h2 className="text-2xl font-bold pl-4">What's Popular</h2>
           <ToggleSwitch
             options={categories}
@@ -75,13 +75,13 @@ const WhatsPopularSection = () => {
         {/* Loading State */}
         {loading ? (
           <HorizontalSlider>
-            {[...Array(7)].map((_, index) => (
+            {[...Array(8)].map((_, index) => (
               <MediaCardPlaceholder key={index} />
             ))}
           </HorizontalSlider>
         ) : (
           <HorizontalSlider>
-            <Slider {...settings}>
+        
               {media.map((item) => {
                 // Check if the item is a TV show or a movie
                 const link = item.name ? `/tv/${item.id}` : `/movie/${item.id}`
@@ -96,7 +96,7 @@ const WhatsPopularSection = () => {
                   />
                 )
               })}
-            </Slider>
+         
           </HorizontalSlider>
         )}
 
