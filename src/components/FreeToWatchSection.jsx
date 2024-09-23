@@ -19,48 +19,13 @@ const FreeToWatchSection = () => {
     setSelectedCategory(category);
   };
 
-  const sliderSettings = {
-    dots: false,
-    arrows: false,
-    infinite: true,
-    speed: 800,
-    slidesToShow: 7, 
-    slidesToScroll: 10,
-    autoplay: false,
-    autoplaySpeed: 4000,
-    cssEase: "ease-in-out",
-    pauseOnHover: false,
-    pauseOnFocus: false,
-    responsive: [
-      {
-        breakpoint: 1025, 
-        settings: {
-          slidesToShow: 4, 
-          slidesToScroll: 3,
-        },
-      },
-      {
-        breakpoint: 768, 
-        settings: {
-          slidesToShow: 3, 
-          slidesToScroll: 2,
-        },
-      },
-      {
-        breakpoint: 480, 
-        settings: {
-          slidesToShow: 2, 
-          slidesToScroll: 1,
-        },
-      },
-    ],
-  };
+
 
   return (
     <div className='container mx-auto font-custom px-4'>
       <div className="free-to-watch-section">
         {/* Heading and Toggle Switch */}
-        <div className="toggle-switch flex items-center gap-4 mb-6">
+        <div className="toggle-switch flex items-center gap-4 mb-2">
           <h2 className="text-2xl font-bold pl-4">Free To Watch</h2>
           <ToggleSwitch
             options={categories}
@@ -78,7 +43,7 @@ const FreeToWatchSection = () => {
           </HorizontalSlider>
         ) : (
           <HorizontalSlider>
-            <Slider {...sliderSettings}>
+           
               {media.map((item) => {
                 // Check if the item is a TV show or a movie
                 const link = item.name ? `/tv/${item.id}` : `/movie/${item.id}`;
@@ -93,7 +58,7 @@ const FreeToWatchSection = () => {
                   />
                 );
               })}
-            </Slider>
+          
           </HorizontalSlider>
         )}
 
