@@ -37,7 +37,7 @@ const FreeToWatchSection = () => {
         {/* Loading State */}
         {loading ? (
           <HorizontalSlider>
-            {[...Array(7)].map((_, index) => (
+            {[...Array(8)].map((_, index) => (
               <MediaCardPlaceholder key={index} />
             ))}
           </HorizontalSlider>

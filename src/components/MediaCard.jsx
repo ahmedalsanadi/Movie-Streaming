@@ -5,7 +5,7 @@ import React from 'react';
 const MediaCard = ({ imageUrl, title, voteAverage, releaseDate, link }) => {
   return (
     <Link href={link}>
-      <div className="inline-flex flex-col justify-evenly px-1 rounded-b-2xl py-2 mr-4 w-44 transform transition-transform hover:scale-105 hover:shadow-2xl h-full cursor-pointer mt-4">
+      <div className="inline-flex flex-col justify-evenly px-1 rounded-b-2xl py-2 mr-5 w-44 transform transition-transform hover:scale-105 hover:shadow-2xl h-96 cursor-pointer mt-4">
         <div className="relative">
           <Image
             src={imageUrl}
