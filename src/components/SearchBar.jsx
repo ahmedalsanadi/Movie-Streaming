@@ -4,6 +4,7 @@ import { TrendingUpIcon, SearchIcon, XIcon } from '@heroicons/react/solid';
 import { fetchDataFromTMDB } from '../util/fetchDataFromTMDB';
 import Link from 'next/link';
 import Image from 'next/image';
+import debounce from 'lodash/debounce';
 
 const SearchBar = ({ isOpen, onClose }) => {
   const [query, setQuery] = useState('');
