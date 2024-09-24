@@ -19,7 +19,7 @@ const MediaCard = ({ imageUrl, title, voteAverage, releaseDate, link }) => {
           {voteAverage && (
             <div className="absolute bottom-2 left-2 z-30">
               <div
-                className="circle-progress"
+                className="circle-progress w-14 h-14"
                 role="progressbar"
                 style={{ '--progress': voteAverage * 10 }}
               >
