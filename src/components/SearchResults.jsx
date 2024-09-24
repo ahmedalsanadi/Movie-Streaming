@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { fetchDataFromTMDB } from '../util/fetchDataFromTMDB';
 import Pagination from './Pagination'; 
 import MediaCard from './MediaCard'; 
+import LoadingSpinner from './LoadingSpinner';
 
 const SearchResults = ({ query }) => {
   const q = query;
@@ -41,12 +42,10 @@ const SearchResults = ({ query }) => {
           Search Results for <span className="text-blue-500">"{q}"</span>
         </h1>
         {isLoading ? (
-          <div className="flex justify-center items-center h-64">
-            <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500"></div>
-          </div>
+     <LoadingSpinner />
         ) : (
           <>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            <div className=" container mx-auto flex flex-wrap justify-center md:justify-center">
               {results.map((item) => {
                 const mediaType = item.media_type === 'person' ? 'actors' : item.media_type;
                 const imageUrl = `https://image.tmdb.org/t/p/w500${item.poster_path || item.profile_path}`;
