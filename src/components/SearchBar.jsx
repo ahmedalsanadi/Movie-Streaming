@@ -29,6 +29,7 @@ const SearchBar = ({ isOpen, onClose }) => {
     }
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const debouncedSearch = useCallback(
     debounce(async (searchQuery) => { 
       if (!searchQuery.trim()) { 
