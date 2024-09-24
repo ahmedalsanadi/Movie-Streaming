@@ -1,6 +1,7 @@
 import React from "react";
-import CardFrontSide from "./CardFrontSide";
+import FlipCard from "./FlipCard";
 const imgBaseUrl = "https://image.tmdb.org/t/p/w500";
+
 
 // Helper function to capitalize the first letter of a string
 const capitalizeFirstLetter = (string) => {
@@ -27,22 +28,23 @@ const CategoryPage = ({ pageTitle, shows, categoryId }) => {
 
         {/* Show Grid Section */}
         <div className="col-span-12 lg:col-span-9">
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {shows?.length > 0 ? (
-              shows.map((show) => (
-                <CardFrontSide
-                  key={show.id}
-                  data={show}
-                  imgBaseUrl={imgBaseUrl}
-                  link={`/${pageTitle}/${show.id}`} // assuming title refers to pageTitle
-                />
-              ))
-            ) : (
-              <p className="col-span-full text-center text-gray-500">
-                No shows found
-              </p>
-            )}
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {shows?.length > 0 ? (
+          shows.map((show) => (
+            <FlipCard
+              key={show.id}
+              item={show}
+              mediaType={pageTitle}
+              imgBaseUrl={imgBaseUrl}
+              backStyle="alternate"
+            />
+          ))
+        ) : (
+          <p className="col-span-full text-center text-gray-500">
+            No shows found
+          </p>
+        )}
+      </div>
         </div>
       </div>
     </div>
