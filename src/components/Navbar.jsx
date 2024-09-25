@@ -1,15 +1,17 @@
 "use client"
-import { useState, useEffect } from "react"
-import { MenuIcon, SearchIcon } from "@heroicons/react/solid"
-import { FaMoon, FaSun } from "react-icons/fa"
-import { useDarkMode } from "../hooks/useDarkMode"
-import Sidebar from "./Sidebar"
-import LinkDropdown from "../components/LinkDropdown"
-import ProfileDropdown from "../components/ProfileDropdown"
-import Image from "next/image"
-import logo from "../images/logo.svg"
-import { fetchGenres } from "../services/fetchGenres"
-import Link from "next/link"
+// components/Navbar.js
+import { useState, useEffect } from "react";
+import { MenuIcon, SearchIcon } from "@heroicons/react/solid";
+import { FaMoon, FaSun } from "react-icons/fa";
+import { useDarkMode } from "../hooks/useDarkMode";
+import Sidebar from "./Sidebar";
+import LinkDropdown from "../components/LinkDropdown";
+import ProfileDropdown from "../components/ProfileDropdown";
+import SearchBar from "../components/SearchBar";
+import Image from "next/image";
+import logo from "../images/logo.svg";
+import { fetchGenres } from "../services/fetchGenres";
+import Link from "next/link";
 
 // Centralized navLinks data
 const NAV_LINKS_TEMPLATE = [
@@ -26,34 +28,37 @@ const NAV_LINKS_TEMPLATE = [
   },
 ]
 
+
 const Navbar = () => {
-  const { darkMode, toggleDarkMode } = useDarkMode()
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
-  const [navLinks, setNavLinks] = useState(NAV_LINKS_TEMPLATE)
+  const { darkMode, toggleDarkMode } = useDarkMode();
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [navLinks, setNavLinks] = useState(NAV_LINKS_TEMPLATE);
 
-  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen)
+  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
+  const toggleSearch = () => setIsSearchOpen(!isSearchOpen);
 
-  // Fetch genres and update the navLinks
-  useEffect(() => {
-    const updateNavLinksWithGenres = async () => {
-      const movieGenres = await fetchGenres() // Return an array of genre names
-      setNavLinks((prevLinks) =>
-        prevLinks.map((link) => {
-          if (link.label === "Genres") {
-            return { ...link, dropdownItems: movieGenres }
-          }
-          return link
-        }),
-      )
-    }
+ // Fetch genres and update the navLinks
+ useEffect(() => {
+  const updateNavLinksWithGenres = async () => {
+    const movieGenres = await fetchGenres() // Return an array of genre names
+    setNavLinks((prevLinks) =>
+      prevLinks.map((link) => {
+        if (link.label === "Genres") {
+          return { ...link, dropdownItems: movieGenres }
+        }
+        return link
+      }),
+    )
+  }
 
-    updateNavLinksWithGenres()
-  }, [])
+  updateNavLinksWithGenres()
+}, [])  
 
   return (
     <header className="bg-gray-200 dark:bg-gray-900 text-[#032541] dark:text-white sticky top-0 z-50 shadow-lg">
       <nav className="container mx-auto h-16 flex items-center justify-between px-4 md:px-6">
-        <div className="flex  items-center gap-12">
+       <div className="flex  items-center gap-12">
           {/* Hamburger Icon */}
           <div className="md:hidden">
             <MenuIcon
@@ -99,8 +104,10 @@ const Navbar = () => {
 
         {/* Right Section */}
         <div className="flex items-center space-x-4 md:space-x-6">
-          <SearchIcon className="w-6 h-6 hover:text-[#01b4e4] cursor-pointer hidden md:block" />
-          {/* <NotificationDropdown /> not-required*/}
+          <SearchIcon
+            className="w-6 h-6 hover:text-[#01b4e4] cursor-pointer  md:block"
+            onClick={toggleSearch}
+          />
           <ProfileDropdown />
           <button
             onClick={toggleDarkMode}
@@ -121,8 +128,11 @@ const Navbar = () => {
         toggleSidebar={toggleSidebar}
         navLinks={navLinks}
       />
-    </header>
-  )
-}
 
-export default Navbar
+      {/* SearchBar */}
+      <SearchBar isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
+    </header>
+  );
+};
+
+export default Navbar;

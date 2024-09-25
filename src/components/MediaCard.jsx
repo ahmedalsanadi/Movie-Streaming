@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
-const MediaCard = ({ imageUrl, title, voteAverage, releaseDate, link }) => {
+const MediaCard = ({ imageUrl, title, voteAverage, releaseDate, link, mediaType }) => {
   return (
     <Link href={link}>
       <div className="inline-flex flex-col justify-evenly px-1 rounded-b-2xl py-2 mr-5 w-44 transform transition-transform hover:scale-105 hover:shadow-2xl h-96 cursor-pointer mt-4">
@@ -15,17 +15,17 @@ const MediaCard = ({ imageUrl, title, voteAverage, releaseDate, link }) => {
             className="mb-2 rounded-2xl w-full"
           />
 
-          {/* Circular Progress Bar */}
-          {voteAverage && (
+          {/* Circular Progress Bar (Only for movies and TV shows) */}
+          {mediaType !== 'person' && voteAverage && (
             <div className="absolute bottom-2 left-2 z-30">
               <div
-              className="circle-progress w-14 h-14 text-gray-200 "
+                className="circle-progress w-14 h-14 text-gray-200"
                 role="progressbar"
                 style={{ '--progress': voteAverage * 10 }}
               >
                 <div className="inner">
                   {Math.round(voteAverage * 10)}
-                  <span>x</span>
+                  <span>%</span>
                 </div>
               </div>
             </div>
@@ -33,7 +33,7 @@ const MediaCard = ({ imageUrl, title, voteAverage, releaseDate, link }) => {
         </div>
 
         <div className="px-4">
-          {/* Title limited to two lines */}
+          {/* Title */}
           <h3
             className="text-lg font-semibold mt-2 dark:text-white text-left break-words line-clamp-2"
             style={{
@@ -46,16 +46,18 @@ const MediaCard = ({ imageUrl, title, voteAverage, releaseDate, link }) => {
             {title}
           </h3>
 
-          {/* Release Date */}
-          <p className="text-gray-400 text-left block text-lg font-thin">
-            {releaseDate
-              ? new Date(releaseDate).toLocaleDateString('en-US', {
-                  month: 'short',
-                  day: 'numeric',
-                  year: 'numeric',
-                })
-              : 'Unknown Release Date'}
-          </p>
+          {/* Release Date (Only for movies and TV shows) */}
+          {mediaType !== 'person' && (
+            <p className="text-gray-400 text-left block text-lg font-thin">
+              {releaseDate
+                ? new Date(releaseDate).toLocaleDateString('en-US', {
+                    month: 'short',
+                    day: 'numeric',
+                    year: 'numeric',
+                  })
+                : 'Unknown Release Date'}
+            </p>
+          )}
         </div>
       </div>
     </Link>
